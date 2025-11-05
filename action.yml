@@ -99,9 +99,15 @@ runs:
       CXX: ccache g++
     shell: bash
     run: |
-      python -m build
-      ls -R
-      pip install ./dist/*.gz
+      # python -m build
+      # ls -R
+      # pip install ./dist/*.gz
+
+      pip install pycron
+      pip install fire
+      pip install requests
+      pip install bs4
+      pip install pyotp
 
 
 
