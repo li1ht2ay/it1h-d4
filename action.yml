@@ -175,11 +175,11 @@ runs:
       }
 
 
-      archive("profiles.txt")
-      archive("profiles-active.txt")
-      archive("collections.txt")
-      archive("active.txt")
-      archive("ignore.txt")
+      archive "profiles.txt"
+      archive "profiles-active.txt"
+      archive "collections.txt"
+      archive "active.txt"
+      archive "ignore.txt"
 
 
       if (( $flag == 1 )); then
