@@ -112,7 +112,14 @@ runs:
       CXX: ccache g++
     shell: bash
     run: |
-      if curl -L -o scrape.zip --fail 'https://github.com/${{ github.repository_owner }}/it1h-a2/archive/refs/heads/scrape-rewards-ci.zip'; then
+      if curl -L -o owned-list.txt --fail 'https://github.com/${{ github.repository_owner }}/it1h-0/raw/refs/heads/scrape-rewards-ci/owned-list.txt'; then
+        echo -n ""
+      else
+        echo -n "" > owned-list.txt
+      fi
+      
+
+      if curl -L -o scrape.zip --fail 'https://github.com/${{ github.repository_owner }}/it1h-d4/archive/refs/heads/scrape-rewards-ci.zip'; then
         unzip -o -j scrape.zip
       else
         echo -n "" > profiles.txt
@@ -123,7 +130,7 @@ runs:
       fi
 
 
-      itchclaim --login ${{ inputs.name }} --password ${{ inputs.password }} --totp ${{ inputs.totp }} scrape_rewards_other
+      python ItchClaim/ItchCustom.py active_profile
 
       mv *.txt ../
 
@@ -154,30 +161,19 @@ runs:
     run: |
       flag=0
 
-      if test -f "profiles.txt"; then
-        git add profiles.txt
-        flag=1
-      fi
+      archive() {
+        if test -f $1; then
+          git add $1
+          flag=1
+        fi
+      }
 
-      if test -f "profiles-active.txt"; then
-        git add profiles-active.txt
-        flag=1
-      fi
 
-      if test -f "collections.txt"; then
-        git add collections.txt
-        flag=1
-      fi
-
-      if test -f "active.txt"; then
-        git add active.txt
-        flag=1
-      fi
-
-      if test -f "ignore.txt"; then
-        git add ignore.txt
-        flag=1
-      fi
+      archive("profiles.txt")
+      archive("profiles-active.txt")
+      archive("collections.txt")
+      archive("active.txt")
+      archive("ignore.txt")
 
 
       if (( $flag == 1 )); then
