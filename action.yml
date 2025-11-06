@@ -181,6 +181,8 @@ runs:
       archive "active.txt"
       archive "ignore.txt"
 
+      archive "miss.txt"
+
 
       if (( $flag == 1 )); then
         git commit -m "[cache] rewards"
