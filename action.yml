@@ -144,7 +144,7 @@ runs:
 
   - uses: li1ht2ay-3es/gi1-ac2io3s@checkout-repo
     with:
-      repository: li1ht2ay/it1h-a2
+      repository: li1ht2ay/it1h-d4
 
       token: ${{ inputs.token }}
       auto: true
